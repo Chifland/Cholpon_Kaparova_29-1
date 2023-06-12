@@ -1,27 +1,17 @@
-from django.shortcuts import HttpResponse, redirect
-from datetime import date
-
-# Create your views here.
+from django.shortcuts import render
+from posts.models import Product
 
 
-def hello_view(request):
+def main_view(request):
     if request.method == 'GET':
-        return HttpResponse("Hello! Its my project")
+        return render(request, 'layouts/index.html')
 
 
-def redirect_to_youtube_view    (request):
+def products_view(request):
     if request.method == 'GET':
-        return redirect('https://www.youtube.com')
-
-
-def now_date_view(request):
-    if request.method == 'GET':
-        return HttpResponse(f'Today is {date.today()}')
-
-
-def goodbye_view(request):
-    if request.method == 'GET':
-        return HttpResponse("Goodbye user!")
-
-
+        products = Product.objects.all
+        context_data = {
+            'products': products
+        }
+        return render(request, 'products/products.html', context=context_data)
 

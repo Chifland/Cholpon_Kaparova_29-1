@@ -16,14 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from posts.views import hello_view, redirect_to_youtube_view, now_date_view, goodbye_view
+from posts.views import main_view, products_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', hello_view),
-    path('youtube/', redirect_to_youtube_view),
-    path('now_date/', now_date_view),
-    path('goodbye/', goodbye_view)
+    path('', main_view),
+    path('products/', products_view)
 
 ]
 ''' http://localhost:8000/hello/'''
