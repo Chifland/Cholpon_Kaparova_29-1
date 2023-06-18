@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from posts.models import Product
+from posts.models import Product, Category
 
 
 def main_view(request):
@@ -14,4 +14,13 @@ def products_view(request):
             'products': products
         }
         return render(request, 'products/products.html', context=context_data)
+
+
+def categories_view(request):
+    if request.method == 'GET':
+        categories = Category.objects.all()
+        context_data = {
+            'categories': categories
+        }
+        return render(request, 'products/category.html', context=context_data)
 
