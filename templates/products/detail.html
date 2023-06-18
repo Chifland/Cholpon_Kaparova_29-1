@@ -1,0 +1,23 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <style type="text/css">
+           .product_block {
+               width: 100%;
+               margin-left: 10%;
+               padding: 20px
+           }
+           </style>
+    <div class="post_block">
+        <div class="image">
+            <img src="/media/{{ product.image_of_product}}" alt="">
+        </div>
+
+    </div>
+    <h1> {{ product.name_of_product }}</h1>
+    <h6>{{ product.measure_of_product }}</h6>
+    <h6>{{ product.cost_of_product }}</h6>
+    <h6>{{ product.created_at }}</h6>
+    <h6>{{ product.modified_at }}</h6>
+
+{% endblock %}

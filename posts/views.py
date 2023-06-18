@@ -24,3 +24,17 @@ def categories_view(request):
         }
         return render(request, 'products/category.html', context=context_data)
 
+
+def product_detail_veiw(request, pk):
+    if request.method == 'GET':
+        try:
+            product = Product.objects.get(id=pk)
+        except Product.DoesNotExist:
+            return render(request, 'products/detail.html')
+        context_data = {
+            'product': product
+        }
+        return render(request, 'products/detail.html', context=context_data)
+
+
+

@@ -1,17 +1,24 @@
 {% extends 'layouts/index.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'product.css' %}"
+{% endblock %}
 
 {% block content %}
     <div class="products">
         {% for product in products %}
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <h1 class="card-image">{{ product.image_of_product }}</h1>
+                    <div class="image">
+                        <img src="/media/{{ product.image_of_product}}" alt="">
+                    </div>
                 <h2 class="card-name">{{ product.name_of_product }}</h2>
-                <h3 class="card-cost">{{ product.cost_of_product }}</h3>
+                <h6 class="card-cost">{{ product.cost_of_product }}</h6>
                   {% for category in product.categories_list %}
                       <p>{{ category.title }}</p>
                   {% endfor %}
-                <a href="#" class="card-link">Card link</a>
+                <a href="/products/{{ product.id }}/" class="card-link">More</a>
                 <a href="#" class="card-link">Another link</a>
               </div>
             </div>
