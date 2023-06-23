@@ -19,16 +19,26 @@ from django.urls import path
 from django.conf.urls.static import static
 
 from BLOG import settings
-from posts.views import main_view, products_view, categories_view, product_detail_veiw
+from posts.views import (
+    main_view,
+    products_view,
+    categories_view,
+    product_detail_view,
+    product_create_view,
+    category_create_view,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view),
     path('products/', products_view),
     path('categories/', categories_view),
-    path('products/<int:pk>/', product_detail_veiw)
+    path('products/<int:pk>/', product_detail_view),
+    path('products/create/', product_create_view),
+    path('products/createcategory/', category_create_view)
 
 ]
+
 ''' http://localhost:8000/hello/'''
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
