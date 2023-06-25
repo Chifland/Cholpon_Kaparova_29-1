@@ -28,6 +28,8 @@ from posts.views import (
     category_create_view,
 )
 
+from users.views import register_view, login_view, logout_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view),
@@ -35,7 +37,10 @@ urlpatterns = [
     path('categories/', categories_view),
     path('products/<int:pk>/', product_detail_view),
     path('products/create/', product_create_view),
-    path('products/createcategory/', category_create_view)
+    path('products/createcategory/', category_create_view),
+    path('users/register/', register_view),
+    path('users/login/', login_view),
+    path('users/logout/', logout_view),
 
 ]
 

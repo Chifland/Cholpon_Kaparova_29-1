@@ -13,7 +13,8 @@ def products_view(request):
     if request.method == 'GET':
         products = Product.objects.all
         context_data = {
-            'products': products
+            'products': products,
+            'user': request.user
         }
         return render(request, 'products/products.html', context=context_data)
 
@@ -40,6 +41,9 @@ def product_detail_view(request, pk):
 
 
 def product_create_view(request):
+    if request.user.is_anonymous:
+        return redirect('/products/')
+
     if request.method == 'GET':
         context_data = {
             'form': ProductCreateForm
