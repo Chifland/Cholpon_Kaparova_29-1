@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from posts.models import Product, Category
 from posts.forms import ProductCreateForm, CategoriesCreateForm
+from posts.constants import PAGINATION_LIMIT
 
 
 
@@ -11,10 +13,28 @@ def main_view(request):
 
 def products_view(request):
     if request.method == 'GET':
-        products = Product.objects.all
+        products = Product.objects.all()
+        search_text = request.GET.get('search')
+        page = int(request.GET.get('page', 1))
+        max_page = products.__len__() / PAGINATION_LIMIT
+
+        if search_text:
+            """startswith, endswith, contains"""
+            products = products.filter(Q(name_of_product__contains=search_text) | Q(description__contains=search_text))
+
+        if round(max_page) < max_page:
+            max_page = round(max_page)+1
+        else:
+            max_page = round(max_page)
+
+        products = products[PAGINATION_LIMIT * (page - 1):PAGINATION_LIMIT * page]
+
+
+
         context_data = {
             'products': products,
-            'user': request.user
+            'user': request.user,
+            'pages': range(1, max_page+1)
         }
         return render(request, 'products/products.html', context=context_data)
 

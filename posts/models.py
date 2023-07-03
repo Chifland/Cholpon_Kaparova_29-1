@@ -17,6 +17,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(Category)
+    description = models.TextField()
 
 
     def __str__(self):
