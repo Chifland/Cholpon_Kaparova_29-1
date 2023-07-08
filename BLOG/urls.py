@@ -20,24 +20,24 @@ from django.conf.urls.static import static
 
 from BLOG import settings
 from posts.views import (
-    main_view,
-    products_view,
-    categories_view,
-    product_detail_view,
-    product_create_view,
-    category_create_view,
+    MainPageCBV,
+    ProductsCBV,
+    CategoriesCBV,
+    ProductDetailCBV,
+    ProductCreateCBV,
+    CategoryCreateCBV,
 )
 
 from users.views import register_view, login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_view),
-    path('products/', products_view),
-    path('categories/', categories_view),
-    path('products/<int:pk>/', product_detail_view),
-    path('products/create/', product_create_view),
-    path('products/createcategory/', category_create_view),
+    path('', MainPageCBV.as_view()),
+    path('products/', ProductsCBV.as_view()),
+    path('categories/', CategoriesCBV.as_view()),
+    path('products/<int:pk>/', ProductDetailCBV.as_view()),
+    path('products/create/', ProductCreateCBV.as_view()),
+    path('products/createcategory/', CategoryCreateCBV.as_view()),
     path('users/register/', register_view),
     path('users/login/', login_view),
     path('users/logout/', logout_view),
